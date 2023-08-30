@@ -1,0 +1,31 @@
+<cdk-virtual-scroll-viewport itemSize="50"  class="scrolling-wrapper">
+  <table fd-table>
+    <thead fd-table-header>
+    <tr fd-table-row>
+      <th fd-table-cell>Name</th>
+      <th fd-table-cell>Ready</th>
+      <th fd-table-cell>Description</th>
+      <th fd-table-cell>Date</th>
+    </tr>
+    </thead>
+    <tbody fd-table-body>
+    <tr *cdkVirtualFor="let row of tableRows; templateCacheSize: 40" fd-table-row class="row">
+      <td fd-table-cell class="fd-has-font-weight-semi">
+        {{ row.name }}
+      </td>
+      <td fd-table-cell>
+        <fd-switch fdCompact [(ngModel)]="row.ready"></fd-switch>
+      </td>
+      <td fd-table-cell>
+
+        <fdp-textarea name="readonlyDescription"
+                      height="200px"
+                      [(ngModel)]="row.description"[readonly]="true">
+        </fdp-textarea>
+      </td>
+      <td fd-table-cell>{{ row.date }}</td>
+    </tr>
+    </tbody>
+  </table>
+</cdk-virtual-scroll-viewport>
+
