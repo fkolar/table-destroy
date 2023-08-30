@@ -57,7 +57,7 @@ export class ItemTableStateService {
       (this._table as any)._tableScrollDispatcher
         .verticallyScrolled()
         .pipe(
-          filter(() => this._table!.virtualScroll && !!this._table!.bodyHeight),
+          filter(() => this._table!._virtualScrollDirective!.virtualScroll && !!this._table!.bodyHeight),
           debounceTime(400)
         )
         .subscribe(() => {
@@ -88,10 +88,10 @@ export class ItemTableStateService {
     this._initialScroll = true;
 
     this._ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        const scrollDiv = this.scrollable as HTMLDivElement;
-        scrollDiv.scrollTop = this.currentScrollPos;
-      });
+        setTimeout(() => {
+          const scrollDiv = this.scrollable as HTMLDivElement;
+          scrollDiv.scrollTop = this.currentScrollPos;
+        });
     });
   }
 }

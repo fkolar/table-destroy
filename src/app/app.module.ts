@@ -16,19 +16,21 @@ import {
   IllustratedMessageModule, LayoutPanelModule,
   ListModule, MultiInputModule,
   ObjectStatusModule,
-  PopoverModule, SegmentedButtonModule, SelectModule, TableModule,
+  PopoverModule, SegmentedButtonModule, SelectModule, SwitchModule, TableModule,
   ToolbarModule
 } from "@fundamental-ngx/core";
 import {
   FdpFormGroupModule, PlatformButtonModule,
   platformContentDensityModuleDeprecationsProvider, PlatformInputModule, PlatformListModule,
   PlatformMenuModule,
-  PlatformSearchFieldModule, PlatformTableModule
+  PlatformSearchFieldModule, PlatformTableModule, PlatformTextAreaModule
 } from "@fundamental-ngx/platform";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import { MultiInputComponent } from './multi-input/multi-input.component';
 import {HttpClientModule} from "@angular/common/http";
+import { CdkScrollComponent } from './cdk-scroll/cdk-scroll.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import {HttpClientModule} from "@angular/common/http";
     ItemsPageComponent,
     LandingPageComponent,
     MultiInputComponent,
+    CdkScrollComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,9 @@ import {HttpClientModule} from "@angular/common/http";
     PopoverModule,
     PlatformListModule,
     ListModule,
+    ScrollingModule,
+    SwitchModule,
+    PlatformTextAreaModule,
     ThemingModule.withConfig({ defaultTheme: 'sap_horizon', changeThemeOnQueryParamChange: false })
   ],
   providers: [

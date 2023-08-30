@@ -27,14 +27,20 @@ export class ItemsPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   source!: ItemsDataSource;
 
+  itemsDataProviderExample!: ItemsDataProviderExample;
   constructor(public _itemState: ItemTableStateService) {
   }
 
   ngOnInit(): void {
     this._itemState.table = this.table;
 
-    this.source = new ItemsDataSource(new ItemsDataProviderExample(), this._itemState, this.table);
+    this.itemsDataProviderExample = new ItemsDataProviderExample();
+    this.source = new ItemsDataSource(this.itemsDataProviderExample, this._itemState, this.table);
     this.source.init();
+  }
+
+  onExpand(evemnt: any ): void {
+
   }
 
   ngAfterViewInit(): void {
@@ -108,7 +114,19 @@ export class ItemsDataSource extends TableDataSource<TableRow> {
       const initItems = this.state.currentItems?.length > 0 ? this.state.currentItems : undefined;
       (this.dataProvider as ItemsDataProviderExample).initialize(initItems);
     }
+
+
+
+    merge(
+      this.table!.rowToggleOpenState,
+    ).pipe(
+      map(() => this.table!.getTableState())
+    )
+      .subscribe((state) => {
+        // do something here
+      });
   }
+
 
   destroy(): void {
     this._subscriptions.unsubscribe();
@@ -118,6 +136,11 @@ export class ItemsDataSource extends TableDataSource<TableRow> {
     super.fetch(tableState);
 
     console.log('Table State updated: ', this.tableState)
+  }
+
+
+  collapse(tableState: TableState) {
+
   }
 
 }
